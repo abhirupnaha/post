@@ -1,0 +1,34 @@
+.container {
+}
+
+.container--level-1 {
+    background-color: hsla(var(--base-dark), var(--level-1));
+    color: hsla(var(--base-dark), calc(var(--level-1) + var(--fg-dark-offset)));
+    box-shadow:
+        inset 0 0 0.2em 0.01em hsla(0, 0%, 100%, 0.1),
+        0 0 0.5em hsla(0, 0%, 0%, 0.6);
+}
+
+.container--level-2 {
+    background-color: hsla(var(--base-dark), var(--level-2));
+    color: hsla(var(--base-dark), calc(var(--level-2) + var(--fg-dark-offset)));
+    box-shadow:
+        inset 0 0 0.2em 0.01em hsla(0, 0%, 100%, 0.15),
+        0 0 0.5em hsla(0, 0%, 0%, 0.55);
+}
+
+.container--level-3 {
+    background-color: hsla(var(--base-dark), var(--level-3));
+    color: hsla(var(--base-dark), calc(var(--level-3) + var(--fg-dark-offset)));
+    box-shadow:
+        inset 0 0 0.2em 0.01em hsla(0, 0%, 100%, 0.2),
+        0 0 0.5em hsla(0, 0%, 0%, 0.5);
+}
+
+.container--level-4 {
+    background-color: hsla(var(--base-dark), var(--level-4));
+    color: hsla(var(--base-dark), calc(var(--level-4) + var(--fg-dark-offset)));
+    box-shadow:
+        inset 0 0 0.2em 0.01em hsla(0, 0%, 100%, 0.25),
+        0 0 0.5em hsla(0, 0%, 0%, 0.45);
+}

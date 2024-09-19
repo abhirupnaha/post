@@ -1,0 +1,66 @@
+.comment__bttn {
+    font-size: 0.95rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.3rem;
+}
+
+.comment__post {
+    padding: 0.5rem;
+    margin-bottom: 0.32rem;
+    font-size: 1rem;
+    background-color: hsla(0, 0%, 100%, 0.075);
+    border-radius: 0.35rem;
+}
+
+.comment__container {
+    padding: 0.25rem;
+    display: flex;
+    gap: 0.4rem;
+    justify-content: end;
+    flex-wrap: wrap;
+}
+
+.comment__container__add-bttn {
+    font-size: 1rem;
+    padding: 0.25rem 0.25rem;
+    font-weight: bold;
+    border-radius: 0.3rem;
+    align-self: end;
+    min-width: 5.6rem;
+}
+
+.comment__container__input {
+    display: grid;
+    position: relative;
+    flex-grow: 1;
+    min-width: 12rem;
+}
+
+.comment__input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    color: white;
+}
+
+.comment__input::placeholder {
+    color: white;
+}
+
+.comment__container__input::after {
+    content: "";
+    position: absolute;
+    height: 0.15rem;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: hsla(0, 0%, 100%, 0.3);
+    border-radius: 0.5rem;
+    z-index: 100;
+}
+
+.comment__container__input:has(.comment__input:focus)::after {
+    background-color: var(--accent-color-dark);
+}

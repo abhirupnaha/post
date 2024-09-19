@@ -1,0 +1,37 @@
+.bttn {
+    border: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.bttn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 15%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: hsla(0, 0%, 0%, 0.2);
+    opacity: 0;
+    transition:
+        transform 280ms,
+        opacity 1ms;
+}
+
+.bttn:active::after {
+    transform: scale(50);
+    opacity: 1;
+}
+
+.bttn--main {
+    background-color: var(--accent-color-dark);
+    color: hsla(0, 0%, 0%, 0.7);
+}
+
+.bttn--second {
+    background-color: hsl(202, 12%, 36%);
+    color: hsla(0, 0%, 100%, 0.7);
+}
