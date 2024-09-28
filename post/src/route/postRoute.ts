@@ -41,7 +41,7 @@ postRoute.post("/", async (req: Request, res: Response) => {
     await axios.post("http://localhost:3005/event", {
       type: "PostCreated",
       data: {
-        id: createdPost._id.toString(),
+        postId: createdPost._id.toString(),
         title: createdPost.title,
       },
     });

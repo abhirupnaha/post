@@ -15,6 +15,8 @@ eventRoute.post("/", async (req, res) => {
         return;
     }
 
+    console.log(req.body);
+
     try {
         let event: HydratedDocument<EventType> = null;
 

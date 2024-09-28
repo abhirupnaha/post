@@ -53,6 +53,6 @@ export default async function addEvent(
 
         return event;
     } catch (error) {
-        throw new Error("error occured creating event");
+        throw error;
     }
 }

@@ -5,7 +5,7 @@ import axios from "axios";
 export type EventType = {
   type: "CommentCreated";
   data: {
-    id: string;
+    commentId: string;
     content: string;
     postId: string;
   };
@@ -71,7 +71,7 @@ commentRouter.post("/", async (req, res) => {
         data: {
           postId: createdComment.postId.toString(),
           content: content,
-          id: createdComment.commentCollection[0].id.toString(),
+          commentId: createdComment.commentCollection[0].id.toString(),
         },
       };
 
@@ -88,7 +88,7 @@ commentRouter.post("/", async (req, res) => {
         data: {
           postId: updatedComment.postId.toString(),
           content: content,
-          id: updatedComment.commentCollection[
+          commentId: updatedComment.commentCollection[
             updatedComment.commentCollection.length - 1
           ].id.toString(),
         },
@@ -102,7 +102,7 @@ commentRouter.post("/", async (req, res) => {
 
     await axios.post("http://localhost:3005/event", event);
 
-    res.status(201).json({ id: event.data.id });
+    res.status(201).json({ id: event.data.commentId });
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       if (error.response) {
