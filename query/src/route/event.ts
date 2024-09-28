@@ -1,82 +1,63 @@
 import { Router } from "express";
-import postModel from "../model/post.js";
-import { CommentEventDataType, PostEventDataType } from "../types.js";
 import axios from "axios";
+import chalk from "chalk";
+import addEvent from "../helper/addEvent.js";
 
-const validRequests = {
+export const TYPE_EVENT = {
     POST: "PostCreated",
-    COMMENT: "commentCreated"
-};
+    COMMENT: "CommentCreated",
+    QUERY: "QueryCreated"
+} as const;
 
 const eventRoute = Router();
 
 eventRoute.post("/", async (req, res) => {
+    console.log(chalk.blue("event received"));
+    console.log(req.body);
+
     const { type, data } = req.body;
-    if (!type || !data || !Object.values(validRequests).includes(type)) {
+
+    if (!type || !Object.values(TYPE_EVENT).includes(type)) {
+        console.error("request rejected due to invalid event type");
         res.sendStatus(400);
         return;
     }
+
     try {
-        if (type === validRequests.POST) {
-            const postData = data as PostEventDataType;
-
-            const newPost = await new postModel({
-                postId: postData.id,
-                title: postData.title,
-                comments: []
-            }).save();
-
-            console.log("new post created");
-            console.log({
-                id: newPost.id,
-                title: newPost.title,
-                comments: []
-            });
-        } else {
-            const commentData = data as CommentEventDataType;
-
-            const existingPost = await postModel.findOne({ postId: commentData.postId });
-
-            if (!existingPost) {
-                res.sendStatus(404);
+        if (!(type === TYPE_EVENT.QUERY)) {
+            if (!data) {
+                console.error("request rejected due to invalid event data");
+                res.sendStatus(400);
                 return;
             }
 
-            existingPost.comments.push({
-                commentId: commentData.id,
-                content: commentData.content
-            });
-            const response = await existingPost.save();
+            await addEvent(type, data);
 
-            console.log("new comment added to post id " + existingPost.id);
-            console.log({
-                id: existingPost.id,
-                content: existingPost.comments[existingPost.comments.length - 1],
+            await axios.post("http://localhost:3005/event", {
+                type: "QueryCreated"
             });
+
+            res.sendStatus(201);
+        } else {
+            res.sendStatus(200);
         }
-
-        await axios.post("http://localhost:3005/", {
-            type: "QueryCreated",
-            data: null
-        });
-
-        res.sendStatus(201);
     } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
             if (error.response) {
-                console.log("failed request");
+                console.error("failed request");
                 console.log(error.response.data);
                 console.log(error.response.status);
                 console.log(error.response.headers);
             } else if (error.request) {
-                console.log("no response");
+                console.error("no response");
                 console.log(error.request);
             } else {
-                console.log("unknown axios error", error.message);
+                console.error("unknown axios error", error.message);
             }
+        } else {
+            console.error("something went wrong");
+            console.log(error);
         }
-        console.log("something went wrong");
-        console.log(error);
         res.sendStatus(500);
     }
 });

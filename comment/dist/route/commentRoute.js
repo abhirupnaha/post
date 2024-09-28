@@ -49,7 +49,7 @@ commentRouter.post("/", async (req, res) => {
             });
             const createdComment = await newComment.save();
             event = {
-                type: "commentCreated",
+                type: "CommentCreated",
                 data: {
                     postId: createdComment.postId.toString(),
                     content: content,
@@ -65,9 +65,9 @@ commentRouter.post("/", async (req, res) => {
             currentComment.commentCollection.push({ content });
             const updatedComment = await currentComment.save();
             event = {
-                type: "commentCreated",
+                type: "CommentCreated",
                 data: {
-                    postId: updatedComment.id.toString(),
+                    postId: updatedComment.postId.toString(),
                     content: content,
                     id: updatedComment.commentCollection[updatedComment.commentCollection.length - 1].id.toString(),
                 },
@@ -76,7 +76,7 @@ commentRouter.post("/", async (req, res) => {
             console.log("commentCollection updated");
             console.log(event.data);
         }
-        await axios.post("http://localhost:3005", event);
+        await axios.post("http://localhost:3005/event", event);
         res.status(201).json({ id: event.data.id });
     }
     catch (error) {

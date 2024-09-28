@@ -1,5 +1,5 @@
 import { Router } from "express";
-import postModel, { PostModelType } from "../model/post.js";
+import postModel, { PostModelType } from "../model/post.model.js";
 
 const queryRoute = Router();
 

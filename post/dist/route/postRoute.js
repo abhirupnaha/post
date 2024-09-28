@@ -31,7 +31,7 @@ postRoute.post("/", async (req, res) => {
         }
         const newPost = new postModel({ title: title });
         const createdPost = await newPost.save();
-        await axios.post("http://localhost:3005/", {
+        await axios.post("http://localhost:3005/event", {
             type: "PostCreated",
             data: {
                 id: createdPost._id.toString(),

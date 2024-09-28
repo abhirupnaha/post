@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import app from "./app.js";
-const port = 3000;
+const port = 3001;
 const host = "localhost";
 async function start() {
     try {

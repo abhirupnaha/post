@@ -60,7 +60,7 @@ export default function ContextProvider({
         try {
             setIsLoading(true);
 
-            const response = await axios.post("http://localhost:3000/post", {
+            const response = await axios.post("http://localhost:3001/post", {
                 title
             });
 
@@ -106,7 +106,7 @@ export default function ContextProvider({
         try {
             setIsLoading(true);
 
-            const response = await axios.post("http://localhost:3001/comments", {
+            const response = await axios.post("http://localhost:3002/comments", {
                 content,
                 postId,
             });

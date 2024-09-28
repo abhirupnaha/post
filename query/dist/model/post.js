@@ -5,7 +5,8 @@ const postSchema = new Schema({
     comments: {
         type: [
             new Schema({
-                commentId: { type: SchemaTypes.ObjectId, required: true, unique: true },
+                // comment service gaurantees uniqueness of commentId
+                commentId: { type: SchemaTypes.ObjectId, required: true },
                 content: { type: String, required: true }
             })
         ],
