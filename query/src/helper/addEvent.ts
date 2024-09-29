@@ -12,7 +12,7 @@ export default async function addEvent(
             data = data as PostEventDataType;
 
             const newPost = await postModel.create({
-                postId: data.id,
+                postId: data.postId,
                 title: data.title,
                 comments: []
             });

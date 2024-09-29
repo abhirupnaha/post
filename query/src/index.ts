@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import app from "./app.js";
+import syncEvent from "./helper/syncEvent.js";
 
 const port = 3003;
 
@@ -16,6 +17,8 @@ async function start() {
         console.log("error occured while connecting to mongodb");
         console.log(err);
     }
+
+    await syncEvent();
 
     app.listen(port, () => console.log(`query server running at localhost:${port}`));
 }

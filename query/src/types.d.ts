@@ -19,7 +19,7 @@ export type CommentEventDataType = {
 }
 
 export type PostEventDataType = {
-    id: Types.ObjectId,
+    postId: Types.ObjectId,
     title: string
 };
 
