@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-client-depl
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: post-client
+    spec:
+      containers:
+        - name: post-client-pod
+          image: abhirupnaha/post-client:latest
+  selector:
+    matchLabels:
+      app: post-client
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-client-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: post-client
+  ports:
+    - name: post-client
+      protocol: TCP
+      targetPort: 3000
+      port: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-client-nodeport-srv
+spec:
+  type: NodePort
+  selector:
+    app: post-client
+  ports:
+    - name: post-client
+      protocol: TCP
+      targetPort: 3000
+      port: 3000

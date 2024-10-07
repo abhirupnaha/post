@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-post-depl
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: post-post
+    spec:
+      containers:
+        - name: post-post-pod
+          image: abhirupnaha/post-post:latest
+  selector:
+    matchLabels:
+      app: post-post
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-post-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: post-post
+  ports:
+    - name: post-post
+      protocol: TCP
+      targetPort: 3001
+      port: 3001

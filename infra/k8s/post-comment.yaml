@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-comment-depl
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: post-comment
+    spec:
+      containers:
+        - name: post-comment-pod
+          image: abhirupnaha/post-comment:latest
+  selector:
+    matchLabels:
+      app: post-comment
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-comment-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: post-comment
+  ports:
+    - name: post-comment
+      protocol: TCP
+      targetPort: 3002
+      port: 3002

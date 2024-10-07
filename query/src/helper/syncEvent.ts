@@ -8,7 +8,7 @@ export default async function syncEvent() {
     try {
         const posts = await postModel.find();
 
-        const response = await axios.get("http://localhost:3005/event");
+        const response = await axios.get("http://post-event-clusterip-srv:3005/event");
         const allEvents = response.data as EventType[];
 
         if (allEvents.length === 0) return;

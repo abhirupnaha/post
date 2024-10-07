@@ -100,7 +100,7 @@ commentRouter.post("/", async (req, res) => {
       console.log(event.data);
     }
 
-    await axios.post("http://localhost:3005/event", event);
+    await axios.post("http://post-event-clusterip-srv:3005/event", event);
 
     res.status(201).json({ id: event.data.commentId });
   } catch (error: unknown) {

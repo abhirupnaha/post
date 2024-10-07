@@ -31,9 +31,9 @@ eventRoute.post("/", async (req, res) => {
 
         if (event) {
             const responseArr = await Promise.allSettled([
-                axios.post("http://localhost:3001/event", { type, data }), // for post service
-                axios.post("http://localhost:3002/event", { type, data }), // for comment service
-                axios.post("http://localhost:3003/event", { type, data }), // for query service
+                axios.post("http://post-post-clusterip-srv:3001/event", { type, data }), // for post service
+                axios.post("http://post-comment-clusterip-srv:3002/event", { type, data }), // for comment service
+                axios.post("http://post-query-clusterip-srv:3003/event", { type, data }), // for query service
             ]);
 
             responseArr.forEach((response) =>

@@ -1,6 +1,5 @@
 import { Router, Request, Response } from "express";
 import postModel, { PostType } from "../model/post.js";
-import { HydratedDocument } from "mongoose";
 import axios from "axios";
 
 const postRoute = Router();
@@ -38,7 +37,7 @@ postRoute.post("/", async (req: Request, res: Response) => {
     const newPost = new postModel({ title: title });
     const createdPost = await newPost.save();
 
-    await axios.post("http://localhost:3005/event", {
+    await axios.post("http://post-event-clusterip-srv:3005/event", {
       type: "PostCreated",
       data: {
         postId: createdPost._id.toString(),

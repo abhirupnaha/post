@@ -19,10 +19,14 @@ export default function ContextProvider({
 
                 setIsLoading(true);
 
+                // const queryResponse = await axios.get(
+                //     "http://localhost:3003/query",
+                //     { signal }
+                // );
                 const queryResponse = await axios.get(
-                    "http://localhost:3003/query",
+                    "http://mypost.com/query",
                     { signal }
-                );
+                )
                 const query = queryResponse.data as PostType[];
 
                 console.log(query);
@@ -60,9 +64,13 @@ export default function ContextProvider({
         try {
             setIsLoading(true);
 
-            const response = await axios.post("http://localhost:3001/post", {
+            // const response = await axios.post("http://localhost:3001/post", {
+            //     title
+            // });
+
+            const response = await axios.post("http://mypost.com/post", {
                 title
-            });
+            })
 
             if (response.status !== 201)
                 throw new Error(
@@ -106,9 +114,14 @@ export default function ContextProvider({
         try {
             setIsLoading(true);
 
-            const response = await axios.post("http://localhost:3002/comments", {
+            // const response = await axios.post("http://localhost:3002/comments", {
+            //     content,
+            //     postId,
+            // });
+
+            const response = await axios.post("http://mypost.com/comments", {
                 content,
-                postId,
+                postId
             });
 
             if (response.status !== 201)

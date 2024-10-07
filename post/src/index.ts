@@ -2,11 +2,12 @@ import mongoose from "mongoose";
 import app from "./app.js";
 
 const port = 3001;
-const host = "localhost";
+const MONGO_URL = "mongo-clusterip-srv:27017"
 
 async function start() {
   try {
-    await mongoose.connect("mongodb://localhost:27017/micro");
+    // await mongoose.connect("mongodb://localhost:27017/micro");
+    await mongoose.connect(`mongodb://${MONGO_URL}/micro`);
 
     mongoose.connection.on("connected", () => console.log("mongodb connected"));
     mongoose.connection.on("disconnected", () =>
@@ -21,8 +22,8 @@ async function start() {
     console.log(err);
   }
 
-  app.listen(port, host, () => {
-    console.log(`Post server running at ${host}:${port}`);
+  app.listen(port, () => {
+    console.log(`Post server running at port ${port}`);
   });
 }
 start();

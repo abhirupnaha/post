@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-event-depl
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: post-event
+    spec:
+      containers:
+        - name: post-event-pod
+          image: abhirupnaha/post-event:latest
+  selector:
+    matchLabels:
+      app: post-event
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-event-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: post-event
+  ports:
+    - name: post-event
+      protocol: TCP
+      targetPort: 3005
+      port: 3005

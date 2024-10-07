@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-query-depl
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: post-query
+    spec:
+      containers:
+        - name: post-query-pod
+          image: abhirupnaha/post-query:latest
+  selector:
+    matchLabels:
+      app: post-query
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-query-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: post-query
+  ports:
+    - name: post-query
+      protocol: TCP
+      targetPort: 3003
+      port: 3003

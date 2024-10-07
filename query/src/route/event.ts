@@ -33,7 +33,7 @@ eventRoute.post("/", async (req, res) => {
 
             await addEvent(type, data);
 
-            await axios.post("http://localhost:3005/event", {
+            await axios.post("http://post-event-clusterip-srv:3005/event", {
                 type: "QueryCreated"
             });
 
